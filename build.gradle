@@ -8,13 +8,11 @@ repositories {
 
 dependencies {
     testImplementation (
-            'com.codeborne:selenide-selenoid:6.17.0',
-            'org.selenide:selenide-selenoid:2.2.4',
-            'org.junit.jupiter:junit-jupiter:5.9.3')
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+            'com.codeborne:selenide-selenoid:7.4.2',
+            'org.selenide:selenide-selenoid:2.3.8',
+            "org.junit.jupiter:junit-jupiter:5.9.2",
+            "org.slf4j:slf4j-simple:2.0.6"
+    )
 }
 
 test {
