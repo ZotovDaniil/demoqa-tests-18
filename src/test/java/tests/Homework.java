@@ -1,29 +1,25 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-
-import java.io.File;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.files.DownloadActions.click;
 
 public class Homework {
     @BeforeAll
     static void BeforeAll(){
         com.codeborne.selenide.Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.holdBrowserOpen = true;
+
     }
     @Test
     void fillFormTest() {
         open("/automation-practice-form");
-
-        $("#firstName").setValue("Vasya");
+        $("[id=firstName]").setValue("Vasya");
         $("#lastName").setValue("Pupkin");
         $("#userEmail").setValue("email@mail.ru");
         $("#userNumber").setValue("1234567890");
