@@ -24,18 +24,16 @@ public class HomeworkWithPageObjects extends TestBase {
                 .setUserEmail("email@mail.ru")
                 .setGender("Other")
                 .setNumber("1234567890")
-                .setBirthDate("30", "July", "2007");
-        $("#currentAddress").setValue("internet");
-        $("#genterWrapper").$(byText("Other")).click();
+                .setBirthDate("30", "July", "2007")
+                .setCurrentAddress("internet")
+                .setSubjects("Math")
+                .setHobbies("Sports")
+                .uploadPicture("img/1.png")
+                .setPlaceOfLocation("NCR", "Delhi")
+                .clickSubmit();
 
-        $("#subjectsInput").setValue("Maths").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("img/1.png");
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
-        $("#submit").click();
+
+//        $("#submit").click();
         registrationPage.verifyResultsModalAppears()
                 .verifyResults("Student Name", "Vasya " + "Pupkin")
                 .verifyResults("Student Email", "email@mail.ru")
