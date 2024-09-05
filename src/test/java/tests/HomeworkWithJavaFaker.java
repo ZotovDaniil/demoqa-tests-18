@@ -1,24 +1,26 @@
 package tests;
 
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import java.util.Locale;
+
 import static utils.RandomUtils.getRandomEmail;
 import static utils.RandomUtils.getRandomString;
 
 
-public class HomeworkWithRandomUtils extends TestBase {
+public class HomeworkWithJavaFaker extends TestBase {
 
 
     @Test
     void fillFormTest() {
+        Faker faker = new Faker(new Locale("it"));
 
-        String firstname = getRandomString(10),
-                lastname = getRandomString(10),
-                email = getRandomEmail();
+        String firstname = faker.name().firstName(),
+                lastname = faker.name().lastName(),
+                email = faker.internet().emailAddress(),
+                currentAddress = faker.address().fullAddress();
 
         registrationPage.openPage()
 
@@ -28,7 +30,7 @@ public class HomeworkWithRandomUtils extends TestBase {
                 .setGender("Other")
                 .setNumber("1234567890")
                 .setBirthDate("30", "July", "2007")
-                .setCurrentAddress("internet")
+                .setCurrentAddress(currentAddress)
                 .setSubjects("Math")
                 .setHobbies("Sports")
                 .uploadPicture("img/1.png")
