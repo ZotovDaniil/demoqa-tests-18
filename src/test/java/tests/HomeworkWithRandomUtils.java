@@ -1,23 +1,26 @@
 package tests;
 
 
-
 import org.junit.jupiter.api.Test;
 
+import static utils.RandomUtils.getRandomEmail;
+import static utils.RandomUtils.getRandomString;
 
 
-
-public class HomeworkWithPageObjects extends TestBase {
-
-
+public class HomeworkWithRandomUtils extends TestBase {
 
 
     @Test
     void fillFormTest() {
+
+        String firstname = getRandomString(10),
+                lastname = getRandomString(10),
+                email = getRandomEmail();
+
         registrationPage.openPage()
-                .setFirstName("Vasya")
-                .setLastName("Pupkin")
-                .setUserEmail("email@mail.ru")
+                .setFirstName(firstname)
+                .setLastName(lastname)
+                .setUserEmail(email)
                 .setGender("Other")
                 .setNumber("1234567890")
                 .setBirthDate("30", "July", "2007")
@@ -29,15 +32,12 @@ public class HomeworkWithPageObjects extends TestBase {
                 .clickSubmit();
 
 
-
         registrationPage.verifyResultsModalAppears()
-                .verifyResults("Student Name", "Vasya " + "Pupkin")
-                .verifyResults("Student Email", "email@mail.ru")
-                .verifyResults("Gender", "Other" )
+                .verifyResults("Student Name", firstname + " " + lastname)
+                .verifyResults("Student Email", email)
+                .verifyResults("Gender", "Other")
                 .verifyResults("Mobile", "1234567890")
                 .verifyResults("Date of Birth", "30 July,2007");
-
-
 
 
     }
