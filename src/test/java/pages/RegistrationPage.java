@@ -1,18 +1,21 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.github.javafaker.Faker;
 import pages.components.CalendarComponent;
 import pages.components.LocationComponent;
 import pages.components.RegistrationResultsModal;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
+
     private CalendarComponent calendarComponent = new CalendarComponent();
     private RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private LocationComponent locationComponent = new LocationComponent();
+    Faker faker = new Faker();
     private SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -25,11 +28,15 @@ public class RegistrationPage {
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
 
         return this;
     }
 
     public RegistrationPage setFirstName(String value) {
+
         firstNameInput.setValue(value);
 
         return this;

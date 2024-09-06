@@ -5,19 +5,22 @@ package tests;
 import org.junit.jupiter.api.Test;
 
 
-
-
-public class HomeworkWithPageObjects extends TestBase {
+public class HomeworkWithTestData extends TestBase {
 
 
 
 
     @Test
     void fillFormTest() {
+
+        String firstname = "Vasya",
+                lastname = "Pupkin",
+                email = "email@mail.ru";
+
         registrationPage.openPage()
-                .setFirstName("Vasya")
-                .setLastName("Pupkin")
-                .setUserEmail("email@mail.ru")
+                .setFirstName(firstname)
+                .setLastName(lastname)
+                .setUserEmail(email)
                 .setGender("Other")
                 .setNumber("1234567890")
                 .setBirthDate("30", "July", "2007")
@@ -31,8 +34,8 @@ public class HomeworkWithPageObjects extends TestBase {
 
 
         registrationPage.verifyResultsModalAppears()
-                .verifyResults("Student Name", "Vasya " + "Pupkin")
-                .verifyResults("Student Email", "email@mail.ru")
+                .verifyResults("Student Name", firstname + " " + lastname)
+                .verifyResults("Student Email", email)
                 .verifyResults("Gender", "Other" )
                 .verifyResults("Mobile", "1234567890")
                 .verifyResults("Date of Birth", "30 July,2007");
