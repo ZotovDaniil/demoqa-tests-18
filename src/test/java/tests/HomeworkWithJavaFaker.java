@@ -4,10 +4,10 @@ package tests;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
+import java.util.Objects;
 
-import static utils.RandomUtils.getRandomEmail;
-import static utils.RandomUtils.getRandomString;
+import static tests.TestDate.*;
+import static utils.RandomUtils.*;
 
 
 public class HomeworkWithJavaFaker extends TestBase {
@@ -15,35 +15,47 @@ public class HomeworkWithJavaFaker extends TestBase {
 
     @Test
     void fillFormTest() {
-        Faker faker = new Faker(new Locale("it"));
+        Faker faker = new Faker();
 
         String firstname = faker.name().firstName(),
                 lastname = faker.name().lastName(),
                 email = faker.internet().emailAddress(),
-                currentAddress = faker.address().fullAddress();
+                currentAddress = faker.address().fullAddress(),
+                userGender = getRandomItemFromArray(genders),
+                userNumber = faker.phoneNumber().subscriberNumber(10),
+                userBirthDay_day = String.format("%02d", faker.number().numberBetween(1,28)),
+                userBirthDay_month = getRandomItemFromArray(months),
+                userBirthDay_year = String.valueOf(faker.number().numberBetween(1990,2000)),
+                userSubject = getRandomItemFromArray(subjects),
+                userHobby = getRandomItemFromArray(hobbies),
+                uploadPicture = "img/1.png",
+                userState = getRandomItemFromArray(states),
+                userCity = getRandomCities(userState);
+
+
 
         registrationPage.openPage()
 
                 .setFirstName(firstname)
                 .setLastName(lastname)
                 .setUserEmail(email)
-                .setGender("Other")
-                .setNumber("1234567890")
-                .setBirthDate("30", "July", "2007")
+                .setGender(userGender)
+                .setNumber(userNumber)
+                .setBirthDate(userBirthDay_day, userBirthDay_month, userBirthDay_year)
                 .setCurrentAddress(currentAddress)
-                .setSubjects("Math")
-                .setHobbies("Sports")
-                .uploadPicture("img/1.png")
-                .setPlaceOfLocation("NCR", "Delhi")
+                .setSubjects(userSubject)
+                .setHobbies(userHobby)
+                .uploadPicture(uploadPicture)
+                .setPlaceOfLocation(userState, userCity)
                 .clickSubmit();
 
 
         registrationPage.verifyResultsModalAppears()
                 .verifyResults("Student Name", firstname + " " + lastname)
                 .verifyResults("Student Email", email)
-                .verifyResults("Gender", "Other")
-                .verifyResults("Mobile", "1234567890")
-                .verifyResults("Date of Birth", "30 July,2007");
+                .verifyResults("Gender", userGender)
+                .verifyResults("Mobile", userNumber)
+                .verifyResults("Date of Birth", userBirthDay_day + " " + userBirthDay_month + "," + userBirthDay_year);
 
 
     }

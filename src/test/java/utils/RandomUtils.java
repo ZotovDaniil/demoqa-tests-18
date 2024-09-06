@@ -1,7 +1,10 @@
 package utils;
 
 import java.security.SecureRandom;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static tests.TestDate.*;
 
 public class RandomUtils {
     public static void main(String[] args) {
@@ -35,4 +38,23 @@ public class RandomUtils {
         int index = getRandomInt(0, values.length - 1);
         return values[index];
     }
+
+    public static String getRandomCities(String values) {
+
+        if (Objects.equals(values, "NCR")) {
+            return getRandomItemFromArray(citiesNCR);
+
+        } else if (Objects.equals(values, "Haryana")) {
+            return getRandomItemFromArray(citiesHaryana);
+
+        } else if (Objects.equals(values, "Uttar Pradesh")) {
+            return getRandomItemFromArray(citiesUttarPradesh);
+
+        } else
+
+            return getRandomItemFromArray(citiesRajasthan);
+
+
+    }
 }
+

@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.github.javafaker.Faker;
 import pages.components.CalendarComponent;
 import pages.components.LocationComponent;
 import pages.components.RegistrationResultsModal;
@@ -10,9 +11,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
+
     private CalendarComponent calendarComponent = new CalendarComponent();
     private RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private LocationComponent locationComponent = new LocationComponent();
+    Faker faker = new Faker();
     private SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -33,6 +36,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setFirstName(String value) {
+
         firstNameInput.setValue(value);
 
         return this;
