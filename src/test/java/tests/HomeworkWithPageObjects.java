@@ -4,11 +4,9 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
+import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -44,6 +42,11 @@ public class HomeworkWithPageObjects extends TestBase {
     }
 
     @Test
+    @Feature("Fill Form Test")
+    @Story("Заполнение и проверка формы")
+    @Owner("zotovds")
+    @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("Заполнение анкеты студента")
     @Tag("demoqa")
     void fillFormTest() {
         step("Открываем форму", () -> {
