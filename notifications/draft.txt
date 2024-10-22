@@ -5,3 +5,5 @@ https://api.telegram.org/bot7185940439:AAGyG5PwEtydSOg_3uKGzeodtwc4oNvXhK4/getUp
 5076556712
 
 java "-DconfigFile=notifications/config.json" -jar notifications/allure-notifications-4.8.0.jar
+
+
